@@ -84,7 +84,7 @@ export default function UserList() {
             </Col>
           </Row>
           <Col span={24}>
-            <Table columns={columns} dataSource={ctx.users.users} />
+            <Table columns={columns} dataSource={ctx?.users?.users} />
           </Col>
         </Container>
       )}
