@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
 
-  async function getAllUsers() {
+  const getAllUsers = async () => {
     setIsLoading(true);
     try {
       const usersResponse = await getAllUser();
@@ -27,9 +27,9 @@ const UserProvider = ({ children }) => {
       });
     }
     setIsLoading(false);
-  }
+  };
 
-  async function getSingleUser(id) {
+  const getSingleUser = async (id) => {
     setIsLoading(true);
     try {
       const userResponse = await getUser(id);
@@ -39,9 +39,9 @@ const UserProvider = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
-  async function updateSingleUser(user) {
+  const updateSingleUser = async (user) => {
     setIsLoading(true);
     try {
       const userResponse = await updateUser(user);
@@ -52,32 +52,32 @@ const UserProvider = ({ children }) => {
     } catch (error) {
       setError(error.message);
       notification.error({
-        description: "Something went wrong",
+        description: error.message,
       });
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
-  async function removeSingleUser(id) {
+  const removeSingleUser = async (id) => {
     setIsLoading(true);
     try {
-      const userResponse = await deleteUser(id);
+      await deleteUser(id);
       setUser({});
       notification.success({
         description: "User delete successfully.",
       });
     } catch (error) {
       setError(error.message);
-      notification.success({
-        description: "Something went wrong",
+      notification.error({
+        description: error.message,
       });
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
-  async function serchUsers(word) {
+  const serchUsers = async (word) => {
     try {
       const usersResponse = await searchUsers(word);
       setUsers(usersResponse);
@@ -86,7 +86,7 @@ const UserProvider = ({ children }) => {
         description: e.message,
       });
     }
-  }
+  };
 
   useEffect(() => {
     getAllUsers();

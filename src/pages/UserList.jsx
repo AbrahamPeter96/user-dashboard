@@ -4,10 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 import { UserContext } from "../Contexts/UsersContext";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const columns = [
   {
@@ -42,7 +39,7 @@ const columns = [
   },
 ];
 
-export default function UserList() {
+const UserList = () => {
   const ctx = useContext(UserContext);
 
   const debounce = (func) => {
@@ -90,4 +87,6 @@ export default function UserList() {
       )}
     </>
   );
-}
+};
+
+export default UserList;

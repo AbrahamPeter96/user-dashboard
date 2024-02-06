@@ -7,10 +7,7 @@ const { Title } = Typography;
 function EditCard({ data, setIsEdit }) {
   let [form, setForm] = useState({});
 
-  const ctx = useContext(UserContext);
-  console.log(ctx);
-
-  useEffect(() => setForm(data), []);
+  useEffect(() => setForm(data?.user), []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +19,7 @@ function EditCard({ data, setIsEdit }) {
   };
 
   const onSubmit = () => {
-    ctx.updateSingleUser(form);
+    data.updateSingleUser(form);
     setIsEdit(false);
   };
   return (
@@ -119,8 +116,12 @@ function EditCard({ data, setIsEdit }) {
         </div>
         <div class="mt-3">
           <Col span={24}>
-            <Button type="primary" disabled={ctx?.isLoading} onClick={onSubmit}>
-              {ctx?.isLoading ? "Saving" : "Save"}
+            <Button
+              type="primary"
+              disabled={data?.isLoading}
+              onClick={onSubmit}
+            >
+              {data?.isLoading ? "Saving" : "Save"}
             </Button>
           </Col>
         </div>
